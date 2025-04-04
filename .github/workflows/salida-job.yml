@@ -2,10 +2,10 @@ name: Run Salida Job
 
 on:
   schedule:
-    # Lunes a jueves a las 19:00
-    - cron: '0 23 * * 1-4'
-    # Viernes a las 18:00
-    - cron: '0 22 * * 5'
+    # Lunes a jueves a las 19:00 (22:00 UTC)
+    - cron: '0 22 * * 1-4'
+    # Viernes a las 18:00 (21:00 UTC)
+    - cron: '0 21 * * 5'
   workflow_dispatch:
 
 jobs:
@@ -28,4 +28,4 @@ jobs:
         env:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
-        run: docker run -e USERNAME -e PASSWORD geo_salida
+        run: docker run -e USERNAME="${{ secrets.USERNAME }}" -e PASSWORD="${{ secrets.PASSWORD }}" geo_salida
